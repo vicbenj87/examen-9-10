@@ -1,0 +1,188 @@
+/* ==========================================================================
+   layout.css — Estructura de pantallas
+   ========================================================================== */
+
+#app {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.pantalla {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--ancho-columna);
+  margin: 0 auto;
+  padding: var(--e5) var(--e4) var(--e6);
+}
+
+.pantalla.activa {
+  display: flex;
+  animation: entrar var(--transicion) both;
+}
+
+@keyframes entrar {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---------- Pantalla de inicio ---------- */
+.portada {
+  margin: auto 0;
+  text-align: center;
+  padding: var(--e6) 0;
+}
+
+.portada__marca {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e2);
+  margin-bottom: var(--e5);
+}
+
+.portada__capitulo {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--lampara);
+  padding: 6px 12px;
+  border: 1px solid rgba(240, 180, 92, 0.35);
+  border-radius: var(--r-full);
+  background: rgba(240, 180, 92, 0.06);
+}
+
+.portada__titulo {
+  font-size: var(--fs-display);
+  margin-bottom: var(--e3);
+}
+
+.portada__titulo em {
+  font-style: italic;
+  color: var(--lampara);
+  text-shadow: 0 0 32px rgba(240, 180, 92, 0.35);
+}
+
+.portada__bajada {
+  color: var(--polvo);
+  max-width: 46ch;
+  margin: 0 auto var(--e6);
+  font-size: var(--fs-md);
+}
+
+.portada__datos {
+  display: flex;
+  justify-content: center;
+  gap: var(--e5);
+  flex-wrap: wrap;
+  margin-bottom: var(--e6);
+}
+
+.dato {
+  text-align: center;
+  min-width: 96px;
+}
+
+.dato__cifra {
+  font-family: var(--mono);
+  font-size: 1.5rem;
+  color: var(--lino);
+  display: block;
+  line-height: 1.1;
+}
+
+.dato__etiqueta {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--polvo);
+}
+
+/* ---------- Cabecera del examen ---------- */
+.barra-superior {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e3);
+  padding-bottom: var(--e4);
+  border-bottom: 1px solid var(--linea);
+  margin-bottom: var(--e5);
+}
+
+.barra-superior__izq { min-width: 0; }
+
+.barra-superior__seccion {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--lampara);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.barra-superior__conteo {
+  font-size: var(--fs-sm);
+  color: var(--polvo);
+}
+
+.marcador {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--mono);
+  white-space: nowrap;
+}
+
+.marcador__valor { font-size: 1.15rem; color: var(--lampara); }
+.marcador__total { font-size: var(--fs-sm); color: var(--polvo); }
+
+/* Puntos de avance: uno por pregunta */
+.progreso {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-bottom: var(--e5);
+}
+
+.progreso__punto {
+  height: 4px;
+  flex: 1 1 6px;
+  min-width: 6px;
+  border-radius: var(--r-full);
+  background: rgba(236, 231, 220, 0.12);
+  transition: background var(--transicion);
+}
+
+.progreso__punto.es-acierto { background: var(--olivo); }
+.progreso__punto.es-parcial { background: var(--lampara); }
+.progreso__punto.es-fallo   { background: var(--granate); }
+.progreso__punto.es-actual  {
+  background: var(--lino);
+  box-shadow: 0 0 10px rgba(236, 231, 220, 0.6);
+}
+
+/* ---------- Zona de la pregunta ---------- */
+.escenario {
+  flex: 1;
+  /* deja aire para que la mecha, que va pegada al pie, no tape el contenido */
+  padding-bottom: var(--e7);
+}
+
+/* ---------- Pie: la mecha (temporizador) ---------- */
+.pie-examen {
+  position: sticky;
+  bottom: 0;
+  padding-top: var(--e5);
+  margin-top: var(--e5);
+  background: linear-gradient(to top, var(--noche-1) 62%, transparent);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .pantalla { padding: var(--e4) var(--e3) var(--e5); }
+  .portada__datos { gap: var(--e4); }
+}

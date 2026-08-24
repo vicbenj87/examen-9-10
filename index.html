@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Examen de los capítulos 9 y 10: La era del reino y la era del exilio. Repaso interactivo con mapa, reyes, profetas e imperios.">
+<meta name="theme-color" content="#0A0F1F">
+<title>Capítulos 9 y 10 · El Reino y el Exilio — Examen</title>
+
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/componentes.css">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230A0F1F'/><circle cx='16' cy='18' r='6' fill='%23F0B45C'/><path d='M16 4c2 4-2 5 0 8' stroke='%23F0B45C' stroke-width='2' fill='none'/></svg>">
+</head>
+
+<body>
+<div class="cielo" aria-hidden="true"></div>
+
+<button id="boton-sonido" class="sonido esta-activo" type="button"
+        aria-pressed="true" title="Silenciar" aria-label="Activar o silenciar el sonido">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M11 5 6 9H3v6h3l5 4V5z"></path>
+    <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
+    <path d="M18.5 5.5a9 9 0 0 1 0 13"></path>
+  </svg>
+</button>
+
+<main id="app">
+
+  <!-- ============ 1. Inicio ============ -->
+  <section id="pantalla-inicio" class="pantalla activa">
+    <div class="portada">
+      <div class="portada__marca">
+        <span class="portada__capitulo">Capítulos 9 y 10</span>
+      </div>
+
+      <h1 class="portada__titulo">El <em>Reino</em> y el <em>Exilio</em></h1>
+      <p class="portada__bajada">
+        De la monarquía unida a la caída de Jerusalén. Vas a recorrer los reyes de
+        Israel y Judá, la división del reino, y el destino de ambos pueblos en manos
+        de Asiria, Babilonia y Persia.
+      </p>
+
+      <div class="portada__datos">
+        <div class="dato">
+          <span class="dato__cifra mono" id="total-preguntas">26</span>
+          <span class="dato__etiqueta">preguntas</span>
+        </div>
+        <div class="dato">
+          <span class="dato__cifra mono">40</span>
+          <span class="dato__etiqueta">segundos c/u</span>
+        </div>
+        <div class="dato">
+          <span class="dato__cifra mono" id="total-puntos">43</span>
+          <span class="dato__etiqueta">puntos</span>
+        </div>
+      </div>
+
+      <div class="formulario">
+        <div class="campo">
+          <label class="campo__etiqueta" for="campo-nombre">Nombre</label>
+          <input class="campo__entrada" id="campo-nombre" type="text"
+                 autocomplete="given-name" placeholder="Tu nombre">
+        </div>
+        <div class="campo">
+          <label class="campo__etiqueta" for="campo-apellido">Apellido</label>
+          <input class="campo__entrada" id="campo-apellido" type="text"
+                 autocomplete="family-name" placeholder="Tu apellido">
+        </div>
+        <p class="aviso" id="aviso-inicio" role="alert"></p>
+        <button class="boton boton--llama" id="boton-comenzar" type="button">Comenzar el examen</button>
+      </div>
+
+      <span class="registro" id="estado-registro">
+        <span class="registro__luz"></span>
+        <span id="estado-registro-texto">Tus resultados se guardan en este dispositivo</span>
+      </span>
+    </div>
+  </section>
+
+  <!-- ============ 2. Examen ============ -->
+  <section id="pantalla-examen" class="pantalla">
+    <header class="barra-superior">
+      <div class="barra-superior__izq">
+        <div class="barra-superior__seccion" id="etiqueta-seccion">—</div>
+        <div class="barra-superior__conteo" id="conteo-preguntas">Pregunta 1</div>
+      </div>
+      <div class="marcador">
+        <span class="marcador__valor" id="marcador-valor">0</span>
+        <span class="marcador__total" id="marcador-total">/ 43</span>
+      </div>
+    </header>
+
+    <div class="progreso" id="progreso" aria-hidden="true"></div>
+
+    <div class="escenario" id="escenario" aria-live="polite"></div>
+
+    <footer class="pie-examen">
+      <div class="mecha" id="mecha">
+        <div class="mecha__cabecera">
+          <span>Tiempo</span>
+          <span class="mecha__segundos" id="mecha-segundos">40s</span>
+        </div>
+        <div class="mecha__carril">
+          <div class="mecha__llama" id="mecha-llama"></div>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <!-- ============ 3. Resultado ============ -->
+  <section id="pantalla-final" class="pantalla">
+    <div class="resultado" id="resultado"></div>
+  </section>
+
+</main>
+
+<!-- Explicación de cada sección (15 segundos) -->
+<div class="modal" id="modal-seccion" role="dialog" aria-modal="true" aria-labelledby="modal-caja">
+  <div class="modal__caja" id="modal-caja"></div>
+</div>
+
+<div class="brindis" id="brindis" role="status"></div>
+
+<!-- Módulos: se cargan como scripts clásicos para que el examen funcione
+     abriendo este archivo directamente desde el disco, sin servidor. -->
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/mapa-imagen.js"></script>
+<script src="js/mapa.js"></script>
+<script src="js/preguntas.js"></script>
+<script src="js/render.js"></script>
+<script src="js/sheets.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
