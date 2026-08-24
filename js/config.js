@@ -14,7 +14,7 @@ EX.CONFIG = {
      guardado local (localStorage + CSV descargable).
      Para conectarlo a tu hoja: sigue las instrucciones de apps-script/Codigo.gs
      y pega aquí la URL que termina en /exec. */
-  urlAppsScript: 'https://script.google.com/macros/s/AKfycbykOhvWCbviUnXmL6kNIlpvEmmvwY1i2bgyymEJXt5ZxGb6sBMoHInNq64nQxpfP-Cu/exec',
+  urlAppsScript: 'https://script.google.com/macros/s/AKfycbykOhvWCbviUnXmL6kNIlpvEmmvwY1i2bgyymEJXt5ZxGb6sBMoHInNq64nQxpfP-Cu/exec', 
   hojaCalculo: { hoja: 'RE0910' },
 
   /* --- Tiempos (milisegundos) --- */
